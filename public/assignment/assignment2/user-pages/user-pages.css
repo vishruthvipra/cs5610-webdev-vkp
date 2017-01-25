@@ -5,3 +5,7 @@ input.form-control {
 body {
     padding-top: 36px;
 }
+
+#navi-header {
+    height: 10px;
+}

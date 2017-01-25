@@ -6,45 +6,61 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="website-pages.css" rel="stylesheet"/>
 </head>
+
+
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav">
-                <li><a href="website-list.html"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                <li><a href="#">New Website</a></li>
+        <h1></h1>
+        <form>
+            <div class="form-group visible-xs">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Name">
+
+                <label for="desc">Description</label>
+                <textarea class="form-control" id="desc" rows="3" placeholder="Description"></textarea>
+            </div>
+
+            <div class="form-group hidden-xs">
+
+                <div id="web-new" class="col-xs-4 ">
+
+                        <h1></h1>
+                        <form>
+                            <br>
+                            <a href="#">Address Book App</a>
+                            <a class="cog-right" href="website-edit.html"><span class="glyphicon glyphicon-cog"></span></a>
+                            <br><br>
+                            <a href="#">Blogger</a>
+                            <a class="cog-right" href="website-edit.html"><span class="glyphicon glyphicon-cog"></span></a>
+                            <br><br>
+                            <a href="#">Blogger App</a>
+                            <a class="cog-right" href="website-edit.html"><span class="glyphicon glyphicon-cog"></span></a>
+                            <br><br>
+                            <a href="#">Script Testing App</a>
+                            <a class="cog-right" href="website-edit.html"><span class="glyphicon glyphicon-cog"></span></a><br>
+                        </form>
+
+                </div>
+                <div class="col-xs-8">
+                    <h1></h1>
+                    <label for="names">Name</label>
+                    <input type="text" class="form-control" id="names" placeholder="Name">
+
+                    <label for="descs">Description</label>
+                    <textarea class="form-control" id="descs" rows="3" placeholder="Description"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../user-pages/profile.html"><span class="pull-right glyphicon glyphicon-home"></span></a></li>
             </ul>
         </div>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="website-new.html"><span class="pull-right glyphicon glyphicon-plus"></span></a></li>
-        </ul>
-    </div>
-</nav>
-
-
-<div class="container-fluid">
-    <h1></h1>
-<form>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name">
-    </div>
-    <div class="form-group">
-        <label for="desc">Description</label>
-        <textarea class="form-control" id="desc" rows="3" placeholder="Description"></textarea>
-    </div>
-</form>
-</div>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="../user-pages/profile.html"><span class="pull-right glyphicon glyphicon-home"></span></a></li>
-        </ul>
-    </div>
-</nav>
-
+    </nav>
 
 </body>
 </html>
