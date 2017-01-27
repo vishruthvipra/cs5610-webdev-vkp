@@ -13,3 +13,10 @@ body {
 .cog-right {
     float: right;
 }
+
+.no-left-margin {
+    margin-left: 12px;
+}
+.no-right-margin {
+    margin-right: 14px;
+}
