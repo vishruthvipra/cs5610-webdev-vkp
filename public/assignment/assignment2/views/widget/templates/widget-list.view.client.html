@@ -1,0 +1,161 @@
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="navbar-text pull-left no-left-margin">
+            <a href="#/page-list"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        </div>
+
+        <div class="navbar-text pull-right no-right-margin">
+            <a href="#/widget-choose"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Widgets</a>
+        </div>
+
+    </nav>
+
+    <div class="container-fluid">
+        <h1></h1>
+        <div ng-repeat="widget in model.widgets">
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#/widget-heading"><span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <div ng-switch="widget.widgetType">
+                <div ng-switch-when="HEADING">
+                    <h1 ng-if="widget.size == 1">{{widget.text}}</h1>
+                    <h2 ng-if="widget.size == 2">{{widget.text}}</h2>
+                    <h3 ng-if="widget.size == 3">{widget.text}}</h3>
+                    <h4 ng-if="widget.size == 4">{{widget.text}}</h4>
+                    <h5 ng-if="widget.size == 5">{{widget.text}}</h5>
+                    <h6 ng-if="widget.size == 6">{{widget.text}}</h6>
+                </div>
+                <div ng-switch-when="IMAGE">
+                    <img ng-src="{{widget.url}}" width="{{widget.width}}">
+                    <h1>chexk here</h1>
+                </div>
+                <div ng-switch-when="YOUTUBE">
+                    <iframe width="100%"
+                            height="315"
+                            ng-src="{{model.doYouTrustUrl(widget.url)}}"
+                            frameborder="0"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!--<div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#/widget-heading">
+                    <span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <h1>LADAKH</h1>
+        </div>
+
+        <div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#">
+                    <span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <b>Pangong Tso, also referred to as Pangong Lake, is an endorheic lake in the Himalayas situated at a height
+                of about 4,350 m (14,270 ft).</b>
+        </div>
+        <div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#/widget-image">
+                    <span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <img class="vk-img-width" src="http://s3.india.com/travel/wp-content/uploads/pangong-lake-preset2.jpg">
+        </div>
+
+        <div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+
+            <p>
+                NLST is proposed to be on-axis
+                <a href="https://en.wikipedia.org/wiki/Altazimuth_mount" title="Altazimuth mount">alt-azimuth</a>
+                <a href="https://en.wikipedia.org/wiki/Gregorian_telescope" title="Gregorian telescope">Gregorian</a>
+                multi-purpose open telescope with the provision of carrying out night time stellar observations using
+                a spectrograph which will be located at <b>Ladakh</b>.
+                It hopes to resolve features on the
+                <a href="https://en.wikipedia.org/wiki/Sun" title="Sun">Sun</a>
+                of the size of about 0.1 arcsec.
+            </p>
+        </div>
+
+        <div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#">
+                    <span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <h4>
+                Ladakh: The land of high passes
+            </h4>
+        </div>
+
+        <div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#/widget-youtube">
+                    <span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <iframe width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/AK-MUzWdpjU"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+
+        <div>
+            <div class="vk-toolbar">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <a href="#">
+                    <span class="glyphicon glyphicon-cog"></span></a>
+            </div>
+            <p>
+                The idea was to just stop,
+                stare and admire at the miracles of Nature in the dry desert territory.
+                This also sounded like the perfect womb for making a timelapse or two.
+                But alas ...we got addicted!
+                The trip spanned over 15 days and we came back with pretty amazing sequences.
+                Here we present to you our timeless journeys in Ladakh.
+            </p>
+
+        </div>
+
+        {{model.widgets}}
+
+
+    </div>-->
+
+
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+
+            <div class="navbar-text pull-left no-left-margin">
+                <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
+            </div>
+
+            <div class="navbar-text pull-left no-left-margin">
+                <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+            </div>
+
+            <div class="navbar-text pull-right no-right-margin">
+                <a href="#/profile"><span class="glyphicon glyphicon-home"></span></a>
+            </div>
+        </div>
+    </nav>
