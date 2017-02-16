@@ -7,6 +7,7 @@
         .factory("PageService", PageService);
 
         function PageService() {
+            var autoincr = 600;
             var pages = [
                 {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
                 {"_id": "432", "name": "Post 2", "websiteId": "789", "description": "Lorem"},
@@ -26,7 +27,12 @@
 
             return api;
             function createPage(websiteId, page) {
-
+                pages.push({_id: String(autoincr),
+                    name: page.name,
+                    websiteId: websiteId,
+                    description: page.description});
+                autoincr++;
+                return pages;
             }
 
             function findPageByWebsiteId(websiteId) {

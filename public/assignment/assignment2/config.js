@@ -59,12 +59,12 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
-                templateUrl: "widget/widget-chooser.view.client.html",
-                controller: "WidgetNewController",
+                templateUrl: "views/widget/templates/widget-choose.view.client.html",
+                controller: "WidgetChooseController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
-                templateUrl: "widget/widget-edit.view.client.html",
+                templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "WidgetEditController",
                 controllerAs: "model"
             })

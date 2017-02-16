@@ -20,7 +20,7 @@
         init();
 
         function createWebsite(newWebsite) {
-            var update = WebsiteService.createWebsite(websiteId, newWebsite);
+            var update = WebsiteService.createWebsite(userId, newWebsite);
             if(update != null)
             {
                 vm.message = "User succesfully updated!"

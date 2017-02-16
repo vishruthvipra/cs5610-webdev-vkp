@@ -9,10 +9,10 @@
     function userService() {
         var autoincr = 500;
         var users = [
-                {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-                {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-                {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-                {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+                {_id: "123", username: "alice",    email: "alice@wonderland.com", password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+                {_id: "234", username: "bob",      email: "bob@marley.com", password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+                {_id: "345", username: "charly",   email: "charly@garcia.com", password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+                {_id: "456", username: "jannunzi", email: "jannunzi@jose.com", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
             ];
 
         var api = {
@@ -29,6 +29,7 @@
         function createUser(user) {
             users.push({_id: String(autoincr),
                 username: user.username,
+                email: user.email,
                 password: user.password,
                 firstName: user.firstName,
                 lastName: user.lastName});
@@ -67,6 +68,7 @@
             for (var u in users) {
                 if(users[u]._id == userId) {
                     users[u].firstName = user.firstName;
+                    users[u].email = user.email;
                     users[u].lastName = user.lastName;
                     return users[u];
                 }
