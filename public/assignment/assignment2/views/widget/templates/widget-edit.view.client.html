@@ -16,7 +16,7 @@
 
             <div class="navbar-header">
                 <a class="navbar-brand"
-                   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
                     Widget Edit
                 </a>
             </div>
@@ -37,16 +37,18 @@
 
             <form>
                 <label for="name">Name</label>
-                <input ng-model="model.widget.widgetType" type="text" class="form-control" id="name" placeholder="Name">
+                <input ng-model="model.widget.text" type="text" class="form-control" id="name" placeholder="Name">
 
                 <label for="texts">Text</label>
-                <input ng-model="model.widget.text" type="text" class="form-control" id="texts" placeholder="Type Here">
+                <input ng-model="model.widget.description"
+                       type="text" class="form-control" id="texts" placeholder="Type Here">
 
-                <div ng-switch="widget.widgetType">
+                <div ng-switch="model.widget.widgetType">
                     <div ng-switch-when="HTML">
                         <label for="num">Size</label>
                         <input ng-model="model.widget.size" type="number" class="form-control" id="num" placeholder="Size">
                     </div>
+
                     <div ng-switch-when="IMAGE">
                         <div class="form-group">
                             <label for="links">URL</label>
@@ -77,6 +79,7 @@
                     </div>
                 </div>
             </form>
+
         <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()">Delete</a>
     </div>
 

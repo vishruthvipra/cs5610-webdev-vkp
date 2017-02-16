@@ -5,16 +5,18 @@
     angular
         .module("WebAppMaker")
         .controller("WidgetEditController", widgetEditController);
-        function widgetEditController($routeParams, WidgetService) {
+        function widgetEditController($routeParams, WidgetService, $location) {
             var vm = this;
-            vm.doYouTrustUrl = doYouTrustUrl;
-            vm.userId = $routeParams.uid;
-            vm.websiteId = $routeParams.wid;
+
+            var userId = $routeParams.uid;
+            vm.userId = userId;
+            var websiteId = $routeParams.wid;
+            vm.websiteId = websiteId;
             var widgetId = $routeParams.wgid;
             vm.widgetId = widgetId;
-            pageId = $routeParams.pid;
+            var pageId = $routeParams.pid;
             vm.pageId = pageId;
-            vm.widgets = WidgetService.findAllWidgets(pageId);
+            var widgets = WidgetService.findAllWidgets(pageId);
 
             vm.widgets = widgets;
             vm.deleteWidget = deleteWidget;
@@ -26,7 +28,7 @@
             init();
 
             function updateWidget(newWidget) {
-                var update = WidgetService.updateWidget(pageId, newWidget);
+                var update = WidgetService.updateWidget(widgetId, newWidget);
                 if (newWidget.widgetType == "HTML")
                 {
                     newWidget.url = "no url";

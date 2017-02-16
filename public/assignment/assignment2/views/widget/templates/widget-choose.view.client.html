@@ -20,10 +20,22 @@
     <div class="container-fluid">
         <h1></h1>
 
-        <form ng-repeat="widget in model.widgets">
+        <form>
             <br>
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
-                {{widget.widgetType}}
+            <a ng-click="model.createWidget(model.widget, String(HEADER))">
+                HEADER
+            </a>
+            <br><br>
+            <a ng-click="model.createWidget(model.widget, String(HTML))">
+                HTML
+            </a>
+            <br><br>
+            <a ng-click="model.createWidget(model.widget, String(IMAGE))">
+                IMAGE
+            </a>
+            <br><br>
+            <a ng-click="model.createWidget(model.widget, String(YOUTUBE))">
+                YOUTUBE
             </a>
             <br>
         </form>

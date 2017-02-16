@@ -5,13 +5,39 @@
     angular
         .module("WebAppMaker")
         .controller("WidgetChooseController", widgetChooseController);
-    function widgetChooseController($routeParams, WidgetService) {
+    function widgetChooseController($routeParams, WidgetService, $location) {
         var vm = this;
-        vm.userId = $routeParams.uid;
-        vm.websiteId = $routeParams.wid;
-        vm.pageId = $routeParams.pid;
-        vm.widgets = WidgetService.findAllWidgets(vm.pageId);
+        var userId = $routeParams.uid;
+        vm.userId = userId;
+        var websiteId = $routeParams.wid;
+        vm.websiteId = websiteId;
+        var widgetId = 10;
+        vm.widgetId = widgetId;
+        var pageId = $routeParams.pid;
+        vm.pageId = pageId;
+        var widgets = WidgetService.findAllWidgets(pageId);
+        vm.createWidget = createWidget;
+        vm.widgets = widgets;
 
+
+        function init() {
+
+        }
+        init();
+
+        function createWidget(thiswidget, widgettype) {
+
+            var update = WidgetService.createWidget(pageId, thiswidget, widgettype);
+
+            if(update != null)
+            {
+                $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                widgetId++;
+            }
+            else {
+                vm.error = "Unable to update..."
+            }
+        }
     }
 
 
