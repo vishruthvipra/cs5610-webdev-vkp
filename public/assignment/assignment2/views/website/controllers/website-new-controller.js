@@ -5,12 +5,15 @@
     angular
         .module("WebAppMaker")
         .controller("WebsiteNewController", websiteNewController)
-    function websiteNewController($routeParams, WebsiteService) {
+    function websiteNewController($routeParams, WebsiteService, $location) {
         var vm = this;
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
-        var websites = WebsiteService.findAllWebsites(userId);
-        vm.websites = websites;
+        WebsiteService
+            .findAllWebsites(userId)
+            .success(function (websites) {
+                vm.websites = websites
+            });
         vm.userId = userId;
         vm.createWebsite= createWebsite;
 
@@ -20,14 +23,18 @@
         init();
 
         function createWebsite(newWebsite) {
-            var update = WebsiteService.createWebsite(userId, newWebsite);
-            if(update != null)
-            {
-                vm.message = "User succesfully updated!"
-            }
-            else {
-                vm.error = "Unable to update..."
-            }
+            var update = WebsiteService
+                .findWebsiteByWebsiteName(userId, newWebsite.name)
+                .success(function (newWebsite) {
+                    vm.error = "Website already exists";
+                })
+                .error(function (err) {
+                    WebsiteService
+                        .createWebsite(userId, newWebsite)
+                        .success(function (website) {
+                            $location.url("user/" + userId + "/website");
+                        })
+                });
         }
     }
 })();

@@ -15,30 +15,30 @@
         vm.widgetId = widgetId;
         var pageId = $routeParams.pid;
         vm.pageId = pageId;
-        var widgets = WidgetService.findAllWidgets(pageId);
         vm.createWidget = createWidget;
-        vm.widgets = widgets;
-
 
         function init() {
-
+            WidgetService
+                .findAllWidgets(pageId)
+                .success(function (widgets) {
+                    vm.widgets = widgets;
+                });
         }
         init();
 
         function createWidget(thiswidget, widgettype) {
 
-            var update = WidgetService.createWidget(pageId, thiswidget, widgettype);
-
-            if(update != null)
-            {
-                $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
-                widgetId++;
-            }
-            else {
-                vm.error = "Unable to update..."
-            }
+            var update = WidgetService
+                .createWidget(pageId, thiswidget, widgettype)
+                .success(function (widget) {
+                    if (update != null) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                        widgetId++;
+                    }
+                    else {
+                        vm.error = "Unable to update..."
+                    }
+                });
         }
     }
-
-
 })();

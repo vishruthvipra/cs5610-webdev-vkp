@@ -16,13 +16,17 @@
             init();
 
             function login(user) {
-                var user = UserService.findUserByCredentials(user.username, user.password);
-                if (user != null) {
-                    $location.url("user/" + user._id);
-                }
-                else {
-                    vm.error = "Incorrect credentials entered";
-                }
+                var promise = UserService
+                    .findUserByCredentials(user.username, user.password)
+                    .success(function (user) {
+                        if (user != "") {
+                            $location.url("user/" + user._id);
+                        }
+                        else {
+                            vm.error = "Incorrect credentials entered";
+                        }
+                    });
+
             }
         }
 

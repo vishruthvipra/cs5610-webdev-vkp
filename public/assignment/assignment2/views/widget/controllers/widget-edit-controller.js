@@ -16,37 +16,49 @@
             vm.widgetId = widgetId;
             var pageId = $routeParams.pid;
             vm.pageId = pageId;
-            var widgets = WidgetService.findAllWidgets(pageId);
 
-            vm.widgets = widgets;
             vm.deleteWidget = deleteWidget;
 
             function init() {
-                vm.widget = WidgetService.findWidgetById(widgetId);
+                WidgetService
+                    .findAllWidgets(pageId)
+                    .success(function (widgets) {
+                        console.log(widgets + "\n \n \n");
+                        vm.widgets = widgets;
+                    });
+                WidgetService
+                    .findWidgetById(widgetId)
+                    .success(function (widget) {
+                        console.log(widget + "\n \n \n");
+                        vm.widget = widget;
+                    });
                 vm.updateWidget = updateWidget;
             }
+
             init();
 
             function updateWidget(newWidget) {
-                var update = WidgetService.updateWidget(widgetId, newWidget);
-                if (newWidget.widgetType == "HTML")
-                {
-                    newWidget.url = "no url";
-                    newWidget.width = "no width";
-                }
-                else if (newWidget.widgetType == "HEADER"){
-                    newWidget.url = "no url";
-                    newWidget.width = "no width";
-                    newWidget.size = "no size";
-                }
-                else if (newWidget.widgetType == "IMAGE"){
-                    newWidget.size = "no size";
-                }
-                else {
-                    newWidget.size = "no size";
-                }
-                if(update != null)
-                {
+                var update = WidgetService
+                    .updateWidget(widgetId, newWidget)
+                    .success(function (widget) {
+                        if (newWidget.widgetType == "HTML") {
+                            newWidget.url = "no url";
+                            newWidget.width = "no width";
+                        }
+                        else if (newWidget.widgetType == "HEADER") {
+                            newWidget.url = "no url";
+                            newWidget.width = "no width";
+                            newWidget.size = "no size";
+                        }
+                        else if (newWidget.widgetType == "IMAGE") {
+                            newWidget.size = "no size";
+                        }
+                        else {
+                            newWidget.size = "no size";
+                        }
+
+                    });
+                if (update != null) {
                     vm.message = "Widget succesfully updated!"
                 }
                 else {
@@ -55,14 +67,16 @@
             }
 
             function deleteWidget() {
-                var update = WidgetService.deleteWidget(widgetId);
-                if(update != null)
-                {
-                    $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
-                }
-                else {
-                    vm.error = "Unable to update..."
-                }
+                var update = WidgetService
+                    .deleteWidget(widgetId)
+                    .success(function (widget) {
+                        if (update != null) {
+                            $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
+                        }
+                        else {
+                            vm.error = "Unable to update..."
+                        }
+                    });
             }
         }
 })();

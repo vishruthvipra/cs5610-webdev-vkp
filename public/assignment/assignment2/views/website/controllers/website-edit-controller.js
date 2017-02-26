@@ -10,37 +10,53 @@
             var userId = $routeParams.uid;
             var websiteId = $routeParams.wid;
 
-            var websites = WebsiteService.findAllWebsites(userId);
-            vm.websites = websites;
+
+            WebsiteService
+                .findAllWebsites(userId)
+                .success(function (websites) {
+                    vm.websites = websites
+                });
+
             vm.userId = userId;
             vm.deleteWebsite = deleteWebsite;
 
             function init() {
-                vm.website = WebsiteService.findWebsiteById(websiteId);
+                WebsiteService
+                    .findWebsiteById(websiteId)
+                    .success(function (website) {
+                        vm.website = website;
+                    });
+
                 vm.updateWebsite = updateWebsite;
             }
             init();
 
             function updateWebsite(newWebsite) {
-                var update = WebsiteService.updateWebsite(websiteId, newWebsite);
-                if(update != null)
-                {
-                    vm.message = "Website succesfully updated!"
-                }
-                else {
-                    vm.error = "Unable to update..."
-                }
+                var update = WebsiteService
+                    .updateWebsite(websiteId, newWebsite)
+                    .success(function (website) {
+                        if(update != null)
+                        {
+                            vm.message = "Website succesfully updated!"
+                        }
+                        else {
+                            vm.error = "Unable to update..."
+                        }
+                    });
             }
 
-            function deleteWebsite() {
-                var update = WebsiteService.deleteWebsite(websiteId);
-                if(update != null)
-                {
-                    $location.url("user/" + userId + "/website");
-                }
-                else {
-                    vm.error = "Unable to update..."
-                }
+            function deleteWebsite(website) {
+                var update = WebsiteService
+                    .deleteWebsite(websiteId, website)
+                    .success(function (website) {
+                        if(update != null)
+                        {
+                            $location.url("user/" + userId + "/website");
+                        }
+                        else {
+                            vm.error = "Could not delete website..."
+                        }
+                    });
             }
         }
 })();

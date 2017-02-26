@@ -8,8 +8,17 @@
         function WebsiteListController($routeParams, WebsiteService) {
             var vm = this;
             var userId = $routeParams.uid;
-            var websites = WebsiteService.findAllWebsites(userId);
-            vm.websites = websites;
             vm.userId = userId;
+            
+            function init() {
+                 WebsiteService
+                    .findAllWebsites(userId)
+                    .success(function (websites) {
+                        vm.websites = websites;
+                    });
+            }
+            init();
+
+
         }
 })();

@@ -11,38 +11,52 @@
             var websiteId = $routeParams.wid;
             var pageId = $routeParams.pid;
 
-            var pages = PageService.findAllPages(websiteId);
-            vm.pages = pages;
+            PageService
+                .findAllPages(websiteId)
+                .success(function (pages) {
+                    vm.pages = pages
+                });
+
             vm.userId = userId;
             vm.websiteId = websiteId;
             vm.deletePage = deletePage;
 
             function init() {
-                vm.page = PageService.findPageById(pageId);
+                PageService
+                    .findPageById(pageId)
+                    .success(function (page) {
+                        vm.page = page;
+                    });
+
                 vm.updatePage = updatePage;
             }
+
             init();
 
             function updatePage(newPage) {
-                var update = PageService.updatePage(pageId, newPage);
-                if(update != null)
-                {
-                    vm.message = "Page succesfully updated!"
-                }
-                else {
-                    vm.error = "Unable to update..."
-                }
+                var update = PageService
+                    .updatePage(pageId, newPage)
+                    .success(function (page) {
+                        if (update != null) {
+                            vm.message = "Page succesfully updated!"
+                        }
+                        else {
+                            vm.error = "Unable to update..."
+                        }
+                    });
             }
 
-            function deletePage() {
-                var update = PageService.deletePage(pageId);
-                if(update != null)
-                {
-                    $location.url("user/" + userId + "/website/" + websiteId + "/page");
-                }
-                else {
-                    vm.error = "Unable to update..."
-                }
+            function deletePage(page) {
+                var update = PageService
+                    .deletePage(pageId, page)
+                    .success(function (page) {
+                        if (update != null) {
+                            $location.url("user/" + userId + "/website/" + websiteId + "/page");
+                        }
+                        else {
+                            vm.error = "Unable to delete..."
+                        }
+                    });
             }
         }
 })();

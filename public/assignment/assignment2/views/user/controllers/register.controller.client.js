@@ -17,14 +17,17 @@
 
 
         function register(user) {
-            var reg = UserService.createUser(user);
-            if (reg != null) {
-                $location.url("user/" + reg._id);
-
-            }
-            else {
-                vm.error = "Incorrect credentials entered";
-            }
+            var newUser = UserService
+                .findUserByUsername(user.username)
+                .success(function (user) {
+                    vm.message = "User already exists"; })
+                .error(function (err) {
+                    UserService
+                        .createUser(user)
+                        .success(function (user) {
+                            $location.url("user/" + user._id);
+                        })
+                });
         }
     }
 
