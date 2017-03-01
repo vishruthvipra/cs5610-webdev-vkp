@@ -106,7 +106,7 @@ module.exports = function (app) {
         var widgetId = req.params.widgetId;
         var newWidget = req.body;
         for (var p in widgets) {
-            if(widgets[p]._id == pageId) {
+            if(widgets[p]._id == widgetId) {
                 widgets[p].text = newWidget.text;
                 widgets[p].description = newWidget.description;
                 widgets[p].text = newWidget.text;

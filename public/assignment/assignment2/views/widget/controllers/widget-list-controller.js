@@ -28,5 +28,6 @@
             baseUrl += id;
             return $sce.trustAsResourceUrl(baseUrl);
         }
+
     }
 })();
