@@ -11,8 +11,6 @@
         vm.userId = userId;
         var websiteId = $routeParams.wid;
         vm.websiteId = websiteId;
-        var widgetId = 10;
-        vm.widgetId = widgetId;
         var pageId = $routeParams.pid;
         vm.pageId = pageId;
         vm.createWidget = createWidget;
@@ -27,13 +25,11 @@
         init();
 
         function createWidget(thiswidget, widgettype) {
-
             var update = WidgetService
-                .createWidget(pageId, thiswidget, widgettype)
+                .createWidget(pageId, widgettype)
                 .success(function (widget) {
                     if (update != null) {
-                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
-                        widgetId++;
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widget._id);
                     }
                     else {
                         vm.error = "Unable to update..."

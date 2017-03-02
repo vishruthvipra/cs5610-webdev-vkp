@@ -23,13 +23,11 @@
                 WidgetService
                     .findAllWidgets(pageId)
                     .success(function (widgets) {
-                        console.log(widgets + "\n \n \n");
                         vm.widgets = widgets;
                     });
                 WidgetService
                     .findWidgetById(widgetId)
                     .success(function (widget) {
-                        console.log(widget + "\n \n \n");
                         vm.widget = widget;
                     });
                 vm.updateWidget = updateWidget;

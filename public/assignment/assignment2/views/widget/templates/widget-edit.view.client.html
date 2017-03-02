@@ -35,7 +35,7 @@
             <strong>Error!</strong> {{model.error}}
         </div>
 
-            <form>
+            <!--<form>-->
                 <label for="name">Name</label>
                 <input ng-model="model.widget.text" type="text" class="form-control" id="name" placeholder="Name">
 
@@ -50,7 +50,24 @@
                     </div>
 
                     <div ng-switch-when="IMAGE">
-                        <div class="form-group">
+
+                        <form action="/api/upload"  method="post" enctype="multipart/form-data">
+                            <label for="links">URL</label>
+                            <input ng-model="model.widget.url" type="url" class="form-control" id="links" placeholder="image URL">
+                            <label for="img-widths">Width</label>
+                            <input ng-model="model.widget.width" type="text" class="form-control" id="img-widths" placeholder="image width">
+                            <label for="upload">Upload</label>
+                            <input  id= "upload" name="myFile"   type="file" class="form-control"/>
+                            <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+                            <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+                            <input  name="userId" value="{{model.userId}}"   style="display: none"/>
+                            <input  name="pageId" value="{{model.pageId}}"   style="display: none"/>
+                            <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+
+                            <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+                        </form>
+                        <h6></h6>
+                        <!--<div class="form-group">
                             <label for="links">URL</label>
                             <input ng-model="model.widget.url" type="url" class="form-control" id="links" placeholder="image URL">
                         </div>
@@ -63,7 +80,7 @@
                         <div class="form-group">
                             <label for="img-upload">Upload</label>
                             <input type="file" class="form-control" id="img-upload" placeholder="choose file">
-                        </div>
+                        </div>-->
                     </div>
 
                     <div ng-switch-when="YOUTUBE">
@@ -78,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            <!--</form>-->
 
         <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()">Delete</a>
     </div>

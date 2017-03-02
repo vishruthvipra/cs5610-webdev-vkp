@@ -2,13 +2,17 @@
  * Created by vishruthkrishnaprasad on 20/2/17.
  */
 module.exports = function (app) {
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findWidget);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
-    var autoincr = 500;
+
+    var autoincr = 800;
     var widgets = [
         { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "LADAKH", "description" : "" +
         "The land of dreams"},
@@ -40,6 +44,32 @@ module.exports = function (app) {
         "Here we present to you our timeless journeys in Ladakh."}
     ];
 
+    function uploadImage(req, res) {
+        console.log("reached upload image");
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var userId        = req.body.userId;
+        var websiteId     = req.body.websiteId;
+        var pageId        = req.body.pageId;
+        var myFile        = req.file;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        for(var w in widgets) {
+            if(widgets[w]._id == widgetId) {
+                widgets[w].url = '/uploads/'+filename;
+            }
+        };
+
+        var url = "/assignment/assignment2/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
+
+        res.redirect(url);
+    }
 
     function findWidget(req, res) {
         var pageId = req.params.pageId;
@@ -67,13 +97,13 @@ module.exports = function (app) {
 
     function createWidget(req, res) {
         var newWidget = req.body;
+        var widgetType = newWidget[0].toString();
         var pageId = req.params.pageId;
         widgets.push({_id: String(autoincr),
             pageId: pageId,
-            widgetType: newWidget.widgetType,
+            widgetType: widgetType,
             text: "no description",
             size: "no size",
-            url: "no url",
             width: "no width"
         });
         autoincr++;
