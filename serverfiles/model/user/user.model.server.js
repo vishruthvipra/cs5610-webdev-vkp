@@ -7,14 +7,39 @@ module.exports = function (app, mongoose) {
     var userModel = mongoose.model('userModel', userSchema);
 
     var api = {
-        createUser: createUser
+        createUser: createUser,
+        findUserById: findUserById,
+        findUserByUsername: findUserByUsername,
+        findUserByCredentials: findUserByCredentials,
+        updateUser: updateUser,
+        deleteUser: deleteUser
     };
     return api;
 
     function createUser(user) {
-        console.log("reached here");
         return userModel.create(user);
     }
+
+    function findUserById(userId) {
+        return userModel.findById(userId);
+    }
+
+    function findUserByUsername(username) {
+        return userModel.findOne({username: username});
+    }
+
+    function findUserByCredentials(username, password) {
+        return userModel.findOne({username: username, password: password});
+    }
+
+    function updateUser(userId, user) {
+        return userModel.update({_id: userId}, {$set: user});
+    }
+
+    function deleteUser(userId) {
+        return userModel.remove({_id: userId});
+    }
+
 };
 
 //

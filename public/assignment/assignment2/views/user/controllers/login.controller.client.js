@@ -26,7 +26,6 @@
                             vm.error = "Incorrect credentials entered";
                         }
                     });
-
             }
         }
 

@@ -25,9 +25,8 @@ var connectionString = 'mongodb://assgn-user:assgn-pass@ds129090.mlab.com:29090/
 console.log(connectionString);
 mongoose.connect(connectionString);
 
-//require ("./test/app.js")(app, mongoose);
-require("./serverfiles/app.js")(app,mongoose);
-require("./serverfiles/model/models.server")(app,mongoose);
+//require ("./test/models.server.js")(app, mongoose);
+require("./serverfiles/models.server.js")(app,mongoose);
 
 var port = process.env.PORT || 3006;
 
