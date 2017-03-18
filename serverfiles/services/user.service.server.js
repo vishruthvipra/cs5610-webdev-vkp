@@ -9,6 +9,7 @@ module.exports = function (app) {
     app.delete("/api/user/:userId", deleteUser);
 
     var autoincr = 500;
+
     var users = [
         {_id: "123", username: "alice",    email: "alice@wonderland.com", password: "alice",    firstName: "Alice",  lastName: "Wonder"},
         {_id: "234", username: "bob",      email: "bob@marley.com", password: "bob",      firstName: "Bob",    lastName: "Marley"},
