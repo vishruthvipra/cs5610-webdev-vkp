@@ -9,9 +9,9 @@ module.exports = function(app, mongoose) {
         firstName: {type: String, required: true},
         lastName: {type: String, required: true},
         phone: {type: String},
-        //websites: [Website],
+        websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
         dateCreated: {type: Date, default: Date.now}
-    });
+    }, {collection: 'UserModel'});
 
     return userSchema;
 };

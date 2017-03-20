@@ -1,12 +1,17 @@
 /**
  * Created by vishruthkrishnaprasad on 20/2/17.
  */
-module.exports = function (app, userModel) {
+module.exports = function (app, model) {
     app.post("/api/user", createUser);
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
+
+    var userModel = model.userModel;
+    var websiteModel = model.websiteModel;
+    var pageModel = model.pageModel;
+    var widgetModel = model.widgetModel;
 
     // var users = [
     //     {_id: "123", username: "alice",    email: "alice@wonderland.com", password: "alice",    firstName: "Alice",  lastName: "Wonder"},
@@ -60,7 +65,12 @@ module.exports = function (app, userModel) {
         userModel
             .findUserByUsername(username)
             .then(function (user) {
-                res.json(user);
+                if (user) {
+                    res.json(user);
+                }
+                else {
+                    res.sendStatus(500).send();
+                }
             }, function (error) {
                 res.sendStatus(500).send(error);
             });

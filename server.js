@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-var connectionString = 'mongodb://assgn-user:assgn-pass@ds129090.mlab.com:29090/assgn';
+//var connectionString = 'mongodb://assgn-user:assgn-pass@ds129090.mlab.com:29090/assgn';
 
-//var connectionString = 'mongodb://127.0.0.1:27017/assgn';
+var connectionString = 'mongodb://127.0.0.1:27017/assgn';
 // mongoose.connect(connectionString);
 // if(process.env.MLAB_USERNAME) {
 //     connectionString = process.env.MLAB_USERNAME + ":" +
