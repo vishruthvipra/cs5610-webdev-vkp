@@ -45,7 +45,7 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel.create(user, function (err, status) {
             if(err) {
-                deferred.abort(err);
+                deferred.reject(new Error(err));
             } else {
                 deferred.resolve(status);
             }
@@ -59,7 +59,7 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel.findById(userId, function (err, status) {
             if (err) {
-                deferred.abort(err);
+                deferred.reject(new Error(err));
             } else {
                 deferred.resolve(status);
             }
@@ -72,11 +72,11 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel.findOne({username: username}, function (err, status) {
             if (err) {
-                deferred.abort(err);
+                deferred.reject(new Error(err));
             }
             else if(status) {
                 deferred.resolve(status);
-                 // deferred.abort(err);
+                 // deferred.reject(err);
             } else {
                 deferred.resolve(status);
             }
@@ -89,9 +89,12 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel.findOne({username: username, password: password}, function (err, status) {
             if (err) {
-                deferred.abort(err);
-            } else {
+                deferred.reject(new Error(err));
+            } else if(status) {
                 deferred.resolve(status);
+                // deferred.reject(err);
+            } else {
+                deferred.reject(new Error(err));
             }
         });
         return deferred.promise;
@@ -102,7 +105,7 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel.update({_id: userId}, {$set: user}, function (err, status) {
             if (err) {
-                deferred.abort(err);
+                deferred.reject(new Error(err));
             } else {
                 deferred.resolve(status);
             }
@@ -115,7 +118,7 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel.remove({_id: userId}, function (err, status) {
             if (err) {
-                deferred.abort(err);
+                deferred.reject(new Error(err));
             } else {
                 deferred.resolve(status);
             }

@@ -25,6 +25,9 @@
                         else {
                             vm.error = "Incorrect credentials entered";
                         }
+                    })
+                    .error(function (err) {
+                        vm.error = "Incorrect credentials entered";
                     });
             }
         }
