@@ -62,25 +62,13 @@
                 else if (widgetId == "YOUTUBE") {
                     createWidget(newWidget, "YOUTUBE");
                 }
+                else if (widgetId == "TEXT") {
+                    createWidget(newWidget, "TEXT");
+                }
                 else {
                     var update = WidgetService
                         .updateWidget(widgetId, newWidget)
                         .success(function (widget) {
-                            /*if (newWidget.type == "HTML") {
-                             newWidget.url = "no url";
-                             newWidget.width = "no width";
-                             }
-                             else if (newWidget.widgetType == "HEADING") {
-                             newWidget.url = "no url";
-                             newWidget.width = "no width";
-                             newWidget.size = "no size";
-                             }
-                             else if (newWidget.widgetType == "IMAGE") {
-                             newWidget.size = "no size";
-                             }
-                             else {
-                             newWidget.size = "no size";
-                             }*/
 
                         });
 

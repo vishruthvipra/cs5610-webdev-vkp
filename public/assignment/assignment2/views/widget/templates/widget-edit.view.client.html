@@ -52,7 +52,23 @@
                     <div ng-switch-when="HTML">
                         <label for="n">Size</label>
                         <input ng-model="model.widget.size" type="number" class="form-control" id="n" placeholder="Size">
+
+                        <div ng-model="model.widget.text"
+                             text-angular
+                             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'], ['indent','outdent'],['html']]">
+                        </div>
                     </div>
+
+
+                    <div ng-switch-when="TEXT">
+                        Rows
+                        <input ng-model="model.widget.rows" class="form-control" type="number"/>
+                        Placeholder
+                        <input ng-model="model.widget.placeholder" class="form-control"/>
+                        Formatted
+                        <input ng-model="model.widget.formatted" type="checkbox"/>
+                    </div>
+
 
                     <div ng-switch-when="IMAGE">
 
@@ -68,6 +84,9 @@
                             <input  name="userId" value="{{model.userId}}"   style="display: none"/>
                             <input  name="pageId" value="{{model.pageId}}"   style="display: none"/>
                             <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+
+                            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/widget-flickr-search"
+                               type="submit" class="btn btn-block btn-info">Search</a>
 
                             <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
                         </form>
@@ -114,23 +133,12 @@
                             <input  name="pageId" value="{{model.pageId}}"   style="display: none"/>
                             <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
 
+                            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/widget-flickr-search"
+                               type="submit" class="btn btn-block btn-info">Search</a>
+
                             <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
                         </form>
                         <h6></h6>
-                        <!--<div class="form-group">
-                            <label for="links">URL</label>
-                            <input ng-model="model.widget.url" type="url" class="form-control" id="links" placeholder="image URL">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="img-widths">Width</label>
-                            <input ng-model="model.widget.width" type="text" class="form-control" id="img-widths" placeholder="image width">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="img-upload">Upload</label>
-                            <input type="file" class="form-control" id="img-upload" placeholder="choose file">
-                        </div>-->
                     </div>
 
                     <div ng-switch-when="YOUTUBE">

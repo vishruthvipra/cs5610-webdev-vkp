@@ -10,7 +10,8 @@ module.exports = function (app, model) {
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/page/:pageId/widget/:widgetId", deleteWidget);
-    app.post ("/api/upload/", upload.single('myFile'), uploadImage);
+    app.post("/api/upload/", upload.single('myFile'), uploadImage);
+    app.put("api/page/:pageId/widget?start=/:startId/&end=/:endId", reorderWidgets);
 
     var userModel = model.userModel;
     var websiteModel = model.websiteModel;
@@ -254,5 +255,11 @@ module.exports = function (app, model) {
         //         return;
         //     }
         // }
+    }
+
+    function reorderWidgets(req, res) {
+        var pageId = req.params.pageId;
+        var start = req.params.startId;
+        var end = req.params.endId;
     }
 };
