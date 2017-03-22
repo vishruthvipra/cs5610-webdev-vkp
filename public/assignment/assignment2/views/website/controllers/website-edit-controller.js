@@ -47,7 +47,7 @@
 
             function deleteWebsite(website) {
                 var update = WebsiteService
-                    .deleteWebsite(websiteId, website)
+                    .deleteWebsite(userId, websiteId)
                     .success(function (website) {
                         if(update != null)
                         {

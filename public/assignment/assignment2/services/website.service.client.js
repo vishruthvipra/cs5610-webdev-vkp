@@ -33,8 +33,9 @@
                 return $http.put("/api/website/" + websiteId, website);
             }
             
-            function deleteWebsite(websiteId, website) {
-                return $http.delete("/api/website/" + websiteId, website);
+            function deleteWebsite(userId, websiteId) {
+                return $http.delete("/api/user/" + userId + "/website/" + websiteId);
+                // return $http.delete("/api/website/" + websiteId, website);
             }
             
             function findAllWebsites(userId) {

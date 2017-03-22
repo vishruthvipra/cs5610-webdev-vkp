@@ -13,7 +13,8 @@
         vm.websiteId = websiteId;
         var pageId = $routeParams.pid;
         vm.pageId = pageId;
-        vm.createWidget = createWidget;
+        //vm.createWidget = createWidget;
+        vm.widgetLabel = widgetLabel;
 
         function init() {
             WidgetService
@@ -24,17 +25,23 @@
         }
         init();
 
-        function createWidget(thiswidget, widgettype) {
-            var update = WidgetService
-                .createWidget(pageId, widgettype)
-                .success(function (widget) {
-                    if (update != null) {
-                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widget._id);
-                    }
-                    else {
-                        vm.error = "Unable to update..."
-                    }
-                });
+        function widgetLabel(widgettype) {
+            $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgettype);
         }
+        // function createWidget(thiswidget, widgettype) {
+        //     console.log(thiswidget);
+        //     console.log("--------------------" + widgettype);
+        //     var update = WidgetService
+        //         .createWidget(pageId, widgettype, thiswidget)
+        //         .success(function (widget) {
+        //             if (update != null) {
+        //                 console.log(widget._id);
+        //                 //$location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widget._id);
+        //             }
+        //             else {
+        //                 vm.error = "Unable to update..."
+        //             }
+        //         });
+        // }
     }
 })();

@@ -48,7 +48,7 @@
 
             function deletePage(page) {
                 var update = PageService
-                    .deletePage(pageId, page)
+                    .deletePage(websiteId, pageId)
                     .success(function (page) {
                         if (update != null) {
                             $location.url("user/" + userId + "/website/" + websiteId + "/page");

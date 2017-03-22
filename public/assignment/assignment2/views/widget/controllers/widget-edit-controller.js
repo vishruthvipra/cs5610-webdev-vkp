@@ -16,7 +16,7 @@
             vm.widgetId = widgetId;
             var pageId = $routeParams.pid;
             vm.pageId = pageId;
-
+            vm.createWidget = createWidget;
             vm.deleteWidget = deleteWidget;
 
             function init() {
@@ -35,38 +35,67 @@
 
             init();
 
-            function updateWidget(newWidget) {
-                var update = WidgetService
-                    .updateWidget(widgetId, newWidget)
-                    .success(function (widget) {
-                        if (newWidget.widgetType == "HTML") {
-                            newWidget.url = "no url";
-                            newWidget.width = "no width";
-                        }
-                        else if (newWidget.widgetType == "HEADER") {
-                            newWidget.url = "no url";
-                            newWidget.width = "no width";
-                            newWidget.size = "no size";
-                        }
-                        else if (newWidget.widgetType == "IMAGE") {
-                            newWidget.size = "no size";
-                        }
-                        else {
-                            newWidget.size = "no size";
-                        }
+            function createWidget(thiswidget, widgettype) {
+                    var update = WidgetService
+                        .createWidget(pageId, widgettype, thiswidget)
+                        .success(function (widget) {
+                            if (update != null) {
+                                vm.message = "Widget succesfully updated!"
+                                //$location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widget._id);
+                            }
+                            else {
+                                vm.error = "Unable to update..."
+                            }
+                        });
+                }
 
-                    });
-                if (update != null) {
-                    vm.message = "Widget succesfully updated!"
+            function updateWidget(newWidget) {
+                if (widgetId == "HEADING") {
+                    createWidget(newWidget, "HEADING");
+                }
+                else if (widgetId == "HTML") {
+                    createWidget(newWidget, "HTML");
+                }
+                else if (widgetId == "IMAGE") {
+                    createWidget(newWidget, "IMAGE");
+                }
+                else if (widgetId == "YOUTUBE") {
+                    createWidget(newWidget, "YOUTUBE");
                 }
                 else {
-                    vm.error = "Unable to update..."
+                    var update = WidgetService
+                        .updateWidget(widgetId, newWidget)
+                        .success(function (widget) {
+                            /*if (newWidget.type == "HTML") {
+                             newWidget.url = "no url";
+                             newWidget.width = "no width";
+                             }
+                             else if (newWidget.widgetType == "HEADING") {
+                             newWidget.url = "no url";
+                             newWidget.width = "no width";
+                             newWidget.size = "no size";
+                             }
+                             else if (newWidget.widgetType == "IMAGE") {
+                             newWidget.size = "no size";
+                             }
+                             else {
+                             newWidget.size = "no size";
+                             }*/
+
+                        });
+
+                    if (update != null) {
+                        vm.message = "Widget succesfully updated!"
+                    }
+                    else {
+                        vm.error = "Unable to update..."
+                    }
                 }
             }
 
             function deleteWidget() {
                 var update = WidgetService
-                    .deleteWidget(widgetId)
+                    .deleteWidget(pageId, widgetId)
                     .success(function (widget) {
                         if (update != null) {
                             $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");

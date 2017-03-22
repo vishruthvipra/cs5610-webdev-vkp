@@ -33,7 +33,7 @@ module.exports = function (app, mongoose) {
         var deferred = q.defer();
         userModel
             .findById(userId, function (err, user) {
-                var index = user.movies.indexOf(websiteId);
+                var index = user.websites.indexOf(websiteId);
                 user.websites.splice(index, 1);
                 user.save();
                 deferred.resolve(user);

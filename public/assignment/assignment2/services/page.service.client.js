@@ -35,8 +35,9 @@
                 return $http.put("/api/page/" + pageId, page);
             }
 
-            function deletePage(pageId, page) {
-                return $http.delete("/api/page/" + pageId, page);
+            function deletePage(websiteId, pageId) {
+                return $http.delete("/api/website/" + websiteId + "/page/" + pageId);
+                // return $http.delete("/api/page/" + pageId, page);
             }
 
             function findAllPages(websiteId) {

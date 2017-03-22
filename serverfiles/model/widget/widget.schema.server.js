@@ -3,9 +3,9 @@
  */
 module.exports = function(app, mongoose) {
     var widgetSchema = mongoose.Schema({
-        //_page: Reference to Page
+        _page: {type: String, required: true},
         type: {type: String, enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT'], required: true},
-        name: {type: String, required: true},
+        name: {type: String},
         text: {type: String},
         placeholder: {type: String},
         description: {type: String},
@@ -18,9 +18,8 @@ module.exports = function(app, mongoose) {
         icon: {type: String},
         deletable: {type: Boolean},
         formatted: {type: Boolean},
-        //widgets: [Widget],
         dateCreated: {type: Date, default: Date.now}
-    });
+    }, {collection: 'WidgetModel'});
 
     return widgetSchema;
 };

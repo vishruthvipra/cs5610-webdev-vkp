@@ -28,6 +28,6 @@ mongoose.connect(connectionString);
 //require ("./test/models.server.js")(app, mongoose);
 require("./serverfiles/models.server.js")(app,mongoose);
 
-var port = process.env.PORT || 3006;
+var port = process.env.PORT || 3000;
 
 app.listen(port);
