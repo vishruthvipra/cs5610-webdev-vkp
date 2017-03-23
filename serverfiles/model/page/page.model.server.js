@@ -15,7 +15,8 @@ module.exports = function (app, mongoose) {
         findPageByName: findPageByName,
         updatePage: updatePage,
         deletePage: deletePage,
-        findAllWidgetsForPage: findAllWidgetsForPage
+        findAllWidgetsForPage: findAllWidgetsForPage,
+        reorderWidgets: reorderWidgets
 
     };
     return api;
@@ -132,7 +133,6 @@ module.exports = function (app, mongoose) {
                 }
             });
 
-
         // pageModel.find({_id: pageId}, {"widgets": 1, "_id": 0}, function (err, status) {
         //     if(err) {
         //         deferred.reject(new Error(err));
@@ -140,6 +140,23 @@ module.exports = function (app, mongoose) {
         //         deferred.resolve(status);
         //     }
         // });
+        return deferred.promise;
+    }
+
+    function reorderWidgets(pageId, start, end) {
+        var deferred = q.defer();
+        pageModel.findById(pageId)
+            .populate('widgets')
+            .exec(function(err, page){
+                if(err) {
+                    deferred.reject(new Error(err));
+                } else {
+                    page.widgets.splice(end, 0, page.widgets.splice(start, 1)[0]);
+                    page.save();
+                    deferred.resolve(page.widgets);
+                }
+            });
+
         return deferred.promise;
     }
 };

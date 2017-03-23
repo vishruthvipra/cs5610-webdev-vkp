@@ -261,5 +261,13 @@ module.exports = function (app, model) {
         var pageId = req.params.pageId;
         var start = req.query.start;
         var end = req.query.end;
+
+        pageModel.reorderWidgets(pageId, start, end)
+            .then(function (doc) {
+                res.sendStatus(200);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
     }
 };
