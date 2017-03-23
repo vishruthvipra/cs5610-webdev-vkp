@@ -14,7 +14,9 @@ module.exports = function (app, mongoose) {
         findPageById: findPageById,
         findPageByName: findPageByName,
         updatePage: updatePage,
-        deletePage: deletePage
+        deletePage: deletePage,
+        findAllWidgetsForPage: findAllWidgetsForPage
+
     };
     return api;
 
@@ -34,7 +36,7 @@ module.exports = function (app, mongoose) {
         pageModel
             .findById(pageId, function (err, page) {
                 var index = page.widgets.indexOf(widgetId);
-                page.pages.splice(index, 1);
+                page.widgets.splice(index, 1);
                 page.save();
                 deferred.resolve(page);
             });
@@ -114,6 +116,30 @@ module.exports = function (app, mongoose) {
                 deferred.resolve(status);
             }
         });
+        return deferred.promise;
+    }
+
+    function findAllWidgetsForPage(pageId) {
+        var deferred = q.defer();
+        pageModel
+            .findById(pageId)
+            .populate('widgets')
+            .exec(function(err, page){
+                if(err) {
+                    deferred.reject(new Error(err));
+                } else {
+                    deferred.resolve(page.widgets);
+                }
+            });
+
+
+        // pageModel.find({_id: pageId}, {"widgets": 1, "_id": 0}, function (err, status) {
+        //     if(err) {
+        //         deferred.reject(new Error(err));
+        //     } else {
+        //         deferred.resolve(status);
+        //     }
+        // });
         return deferred.promise;
     }
 };

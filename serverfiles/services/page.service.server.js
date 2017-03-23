@@ -7,6 +7,7 @@ module.exports = function (app, model) {
     app.get("/api/page/:pageId", findPageById);
     app.put("/api/page/:pageId", updatePage);
     app.delete("/api/website/:websiteId/page/:pageId", deletePage);
+    app.get("/api/page/:pageId/widgets", findAllWidgets);
 
     var userModel = model.userModel;
     var websiteModel = model.websiteModel;
@@ -177,4 +178,25 @@ module.exports = function (app, model) {
         //     }
         // }
     }
+
+    function findAllWidgets (req, res) {
+        var pageId = req.params.pageId;
+        pageModel
+            .findAllWidgetsForPage(pageId)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+        // var pageId = req.params.pageId;
+        // var sites = [];
+        // for (var p in widgets) {
+        //     if(pageId == widgets[p].pageId) {
+        //         sites.push(widgets[p])
+        //     }
+        // }
+        // res.json(sites);
+    }
+
 };

@@ -5,7 +5,7 @@
     angular
         .module("WebAppMaker")
         .controller("WidgetListController", widgetListController);
-    function widgetListController($sce, $routeParams, WidgetService) {
+    function widgetListController($sce, $routeParams, PageService) {
         var vm = this;
         vm.doYouTrustUrl = doYouTrustUrl;
         vm.userId = $routeParams.uid;
@@ -13,7 +13,13 @@
         vm.pageId = $routeParams.pid;
 
         function init() {
-            WidgetService
+            // WidgetService
+            //     .findAllWidgets(vm.pageId)
+            //     .success(function (widgets) {
+            //         vm.widgets = widgets;
+            //     });
+
+            PageService
                 .findAllWidgets(vm.pageId)
                 .success(function (widgets) {
                     vm.widgets = widgets;

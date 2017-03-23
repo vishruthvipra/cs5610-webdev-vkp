@@ -4,7 +4,7 @@
 module.exports = function (app, mongoose) {
     var q = require('q');
     var widgetSchema = require('./widget.schema.server')(app, mongoose);
-    var widgetModel = mongoose.model('widgetModel', widgetSchema);
+    var widgetModel = mongoose.model('WidgetModel', widgetSchema);
 
     var api = {
         createWidget: createWidget,
@@ -94,6 +94,15 @@ module.exports = function (app, mongoose) {
     }
 
     function reorderWidget(pageId, start, end) {
-
+        var deferred = q.defer();
+        model.find().sort({ name: 'criteria' })
+            .exec(function (err, status) {
+                if (err) {
+                    deferred.reject(new Error(err));
+                } else {
+                    deferred.resolve(status);
+                }
+            });
+        return deferred.promise;
     }
 };

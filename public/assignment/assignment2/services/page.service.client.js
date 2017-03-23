@@ -15,7 +15,8 @@
                 "updatePage": updatePage,
                 "deletePage": deletePage,
                 "findAllPages": findAllPages,
-                "findPageByPageName": findPageByPageName
+                "findPageByPageName": findPageByPageName,
+                "findAllWidgets": findAllWidgets
             };
 
             return api;
@@ -46,6 +47,10 @@
 
             function findPageByPageName(websiteId, name) {
                 return $http.get("/api/website/" + websiteId + "/page?name=" + name);
+            }
+
+            function findAllWidgets(pageId) {
+                return $http.get("/api/page/" + pageId + "/widgets");
             }
         }
 })();

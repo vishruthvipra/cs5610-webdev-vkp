@@ -42,7 +42,7 @@
         }
 
         function findAllWidgets(pageId) {
-            return $http.get("/api/page/" + pageId + "/widget");
+            return $http.get("/api/page/" + pageId + "/widgets");
         }
 
         function findWidgetByWidgetName(pageId, name) {
@@ -50,7 +50,7 @@
         }
 
         function reorderWidgets(pageId, start, end) {
-            return $http.put("api/page/" + pageId + "/widget?start=/" + start + "/&end=/" + end);
+            return $http.put("/api/page/" + pageId + "/widget?start=" + start + "&end=" + end);
         }
     }
 })();

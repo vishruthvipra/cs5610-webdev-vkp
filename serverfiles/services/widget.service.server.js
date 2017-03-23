@@ -11,7 +11,7 @@ module.exports = function (app, model) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/page/:pageId/widget/:widgetId", deleteWidget);
     app.post("/api/upload/", upload.single('myFile'), uploadImage);
-    app.put("api/page/:pageId/widget?start=/:startId/&end=/:endId", reorderWidgets);
+    app.put("/api/page/:pageId/widget", reorderWidgets);
 
     var userModel = model.userModel;
     var websiteModel = model.websiteModel;
@@ -103,7 +103,7 @@ module.exports = function (app, model) {
         widgetModel
             .createWidget(pageId, newWidget)
             .then(function (widget) {
-                return pageModel.addWidget(pageId, widget._id);
+                return pageModel.addWidget(pageId, widget._id, widget.type);
             })
             .then(function (doc) {
                 res.sendStatus(200);
@@ -237,7 +237,7 @@ module.exports = function (app, model) {
         widgetModel
             .deleteWidget(widgetId)
             .then(function (widget) {
-                return websiteModel.deleteWebsite(pageId, widget._id);
+                return pageModel.deleteWidget(pageId, widget._id);
                 //res.json(website);
             })
             .then(function (doc) {
@@ -259,7 +259,7 @@ module.exports = function (app, model) {
 
     function reorderWidgets(req, res) {
         var pageId = req.params.pageId;
-        var start = req.params.startId;
-        var end = req.params.endId;
+        var start = req.query.start;
+        var end = req.query.end;
     }
 };
